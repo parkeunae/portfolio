@@ -1,6 +1,7 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (webpackEnv) => {
     const isDevelopment = webpackEnv === 'development' ? true : false;
@@ -28,6 +29,14 @@ module.exports = (webpackEnv) => {
                         }
                     }
                 ]
+            }, {
+                test: /\.scss$/,
+                use: [
+                    'cache-loader',
+                    MiniCssExtractPlugin.loader,
+                    'css-loader',
+                    'sass-loader'
+                ]
             }]
         },
         plugins: [
@@ -35,6 +44,7 @@ module.exports = (webpackEnv) => {
             new HtmlWebpackPlugin({
                 template: './public/index.html'
             }),
+            new MiniCssExtractPlugin(),
         ],
         output: {
             path: path.join(__dirname, 'dist'),

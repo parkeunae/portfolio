@@ -1,0 +1,61 @@
+.header {
+    text-align: center;
+    background-color: $main-color;
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100vh;
+        padding: 0 20px;
+    }
+
+    &-title {
+        margin-bottom: 85px;
+        font-size: 35px;
+        line-height: 1.35;
+        color: #fff;
+    }
+
+    &-desc {
+        margin-bottom: 85px;
+        line-height: 1.5;
+        color: #fff;
+    }
+
+    &-button {
+        width: 230px;
+        height: 54px;
+        border: none;
+        border-radius: 60px;
+        font-family: 'Public Sans', sans-serif;
+        color: $main-color;
+        background-color: #FAF9FE;
+    }
+}
+
+
+
+
+
+@media screen and (min-width: 768px) {
+    .header {
+        .container {
+            height: 548px;
+        }
+
+        &-title {
+            margin-bottom: 65px;
+            font-size: 65px;
+            line-height: 1.3571428571;
+        }
+
+        &-desc {
+            margin-bottom: 65px;
+            font-size: 20;
+            line-height: 1.8;
+        }
+    }
+}

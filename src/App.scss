@@ -1,0 +1,62 @@
+$main-color: #9378FF !global;
+
+/*
+컴포넌트별로 scss 파일을 만들면, 각 파일들이 css 파일로 컴파일된다.
+scss 파일명 앞에 _를 붙이면 css 파일로 컴파일하지 않는다.
+-> 분리된 scss 파일들을 main scss 파일에 import하여 사용한다.
+*/
+@import './components/Header/Header.scss';
+
+$main-color: #9378FF !global;
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    font-family: 'Noto Serif KR', serif;
+}
+
+// Reset CSS
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button,
+input,
+textarea {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 16px;
+}
+
+button:focus,
+button:active,
+input:focus,
+input:active,
+textarea:focus,
+textarea:active {
+    outline: none;
+    box-shadow: none;
+}
+
+ul,
+ol,
+li {
+    list-style-type: none;
+    padding-left: 0;
+    margin-left: 0;
+}
+
+.container {
+    min-width: 260px;
+    margin: 0 auto;
+}
+
+// Fix container width
+@media screen and (min-width: 1200px) {
+    .container {
+        max-width: 960px !important;
+    }
+}

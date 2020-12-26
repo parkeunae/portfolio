@@ -1,8 +1,12 @@
 import React from 'react';
+import Header from './components/Header/Header';
+import './App.scss';
 
 const Root = () => {
     return (
-        <h1>CRA 없이 React 개발하기 + typescript</h1>
+        <div>
+            <Header />
+        </div>
     );
 };
 

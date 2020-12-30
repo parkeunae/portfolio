@@ -26,17 +26,6 @@
         line-height: 1.5;
         color: #fff;
     }
-
-    &-button {
-        width: 230px;
-        height: 54px;
-        border: none;
-        border-radius: 60px;
-        font-family: 'Public Sans', sans-serif;
-        color: $main-color;
-        background-color: #FAF9FE;
-        cursor: pointer;
-    }
 }
 
 @media screen and (min-width: 768px) {

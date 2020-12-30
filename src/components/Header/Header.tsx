@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 
 const Header = () => {
     return (
@@ -11,7 +12,7 @@ const Header = () => {
                     안녕하세요,<br />
                     프론트엔드 개발자 박은애입니다.
                 </p>
-                <button className="header-button">
+                <button className={ classNames('fill-button', 'reverse') }>
                     See my portfolio ▼
                 </button>
             </div>

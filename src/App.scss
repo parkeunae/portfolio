@@ -63,6 +63,21 @@ li {
     margin: 0 auto;
 }
 
+.fill-button {
+    width: 220px;
+    height: 46px;
+    border: none;
+    border-radius: 60px;
+    color:  #fff;
+    background-color:$main-color;
+    cursor: pointer;
+
+    &.reverse {
+        color: $main-color;
+        background-color: #fff;
+    }
+}
+
 // Fix container width
 @media screen and (min-width: 1200px) {
     .container {

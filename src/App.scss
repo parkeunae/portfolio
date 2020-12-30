@@ -1,4 +1,4 @@
-$main-color: #9378FF !global;
+$main-color: #9378FF;
 
 /*
 컴포넌트별로 scss 파일을 만들면, 각 파일들이 css 파일로 컴파일된다.
@@ -7,15 +7,13 @@ scss 파일명 앞에 _를 붙이면 css 파일로 컴파일하지 않는다.
 */
 @import './components/Header/Header.scss';
 
-$main-color: #9378FF !global;
-
 * {
     box-sizing: border-box;
     margin: 0;
 }
 
 body {
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Noto Sans KR', sans-serif;
 }
 
 // Reset CSS
@@ -27,7 +25,7 @@ a {
 button,
 input,
 textarea {
-    font-family: 'Noto Serif KR', serif;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
 }
 

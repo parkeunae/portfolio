@@ -1,4 +1,6 @@
 .contents {
+    $contents-color: #99879D;
+
     .container {
         padding: 52px 16px;
     }
@@ -20,13 +22,13 @@
     }
 
     .anchor-button {
-        border: 1px solid #99879D;
+        border: 1px solid $contents-color;
         border-radius: 4px;
         padding: 4px 12px;
         margin-right: 8px;
         font-size: 12px;
         line-height: 1.25;
-        color: #99879D;
+        color: $contents-color;
     }
 }
 
@@ -54,7 +56,7 @@
 
         .anchor-button {
             padding: 6px 15px;
-            margin-right: 16px;
+            margin-right: 20px;
             font-size: 14px;
             line-height: 1.214;
         }

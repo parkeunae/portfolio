@@ -30,6 +30,27 @@
         line-height: 1.25;
         color: $contents-color;
     }
+
+    .message-input-box {
+        width: 100%;
+        padding: 12px 17px;
+        border: none;
+        border-radius: 8px;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: $contents-color;
+        background-color: #FBEEFF;
+        resize: none;
+
+        &::placeholder {
+            color: $contents-color;
+            opacity: 0.5;
+        }
+    }
+
+    .button-container {
+        text-align: center;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -59,6 +80,23 @@
             margin-right: 20px;
             font-size: 14px;
             line-height: 1.214;
+        }
+
+        .input-container {
+            display: flex;
+            input:first-child {
+                margin-right: 12px;
+            }
+        }
+
+        .message-input-box {
+            padding: 21px 22px;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        .button-container {
+            text-align: right;
         }
     }
 }

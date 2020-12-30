@@ -1,0 +1,23 @@
+.project-item {
+    margin-bottom: 20px;
+    color: $main-color;
+
+    .project-title {
+        margin-bottom: 7px;
+        font-weight: 700;
+
+        .arrow {
+            font-size: 12px;
+        }
+    }
+}
+
+.project-item:last-child {
+    margin-bottom: 0;
+}
+
+@media screen and (min-width: 768px) {
+    .project-item {
+        margin-bottom: 45px;
+    }
+}

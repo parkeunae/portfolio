@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header/Header';
 import Contents from './components/Contents/Contents';
 import AboutMe from './components/Contents/AboutMe';
+import Project from './components/Contents/Project';
 import './App.scss';
 
 const Root = () => {

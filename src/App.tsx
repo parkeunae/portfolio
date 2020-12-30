@@ -12,6 +12,9 @@ const Root = () => {
             <Contents title="About Me">
                 <AboutMe />
             </Contents>
+            <Contents title="Project">
+                <Project />
+            </Contents>
         </div>
     );
 };

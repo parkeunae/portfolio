@@ -31,21 +31,21 @@ const AboutMe = () => {
                     href="https://github.com/parkeunae"
                     target="_blank"
                 >
-                    Github &#x2192;
+                    Github <span aria-hidden="true">&#x2192;</span>
                 </a>
                 <a
                     className="anchor-button"
                     href="https://enai.tistory.com/"
                     target="_blank"
                 >
-                    Blog &#x2192;
+                    Blog <span aria-hidden="true">&#x2192;</span>
                 </a>
                 <a
                     className="anchor-button"
                     href="https://drive.google.com/file/d/1Lb6sVraf5gBWpA4s9-6u33TFcBO33oxM/view?usp=sharing"
                     target="_blank"
                 >
-                    이력서 &#x2192;
+                    이력서 <span aria-hidden="true">&#x2192;</span>
                 </a>
             </div>
         </>

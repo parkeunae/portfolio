@@ -1,0 +1,62 @@
+.contents {
+    .container {
+        padding: 52px 16px;
+    }
+
+    &-title {
+        margin-bottom: 26px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    &-desc {
+        margin-bottom: 12px;
+    }
+
+    &-long-desc {
+        margin-bottom: 12px;
+        font-size: 14px;
+        line-height: 1.7142857143;
+    }
+
+    .anchor-button {
+        border: 1px solid #99879D;
+        border-radius: 4px;
+        padding: 4px 12px;
+        margin-right: 8px;
+        font-size: 12px;
+        line-height: 1.25;
+        color: #99879D;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .contents {
+        .container {
+            padding: 86px 80px;
+        }
+
+        &-title {
+            margin-bottom: 68px;
+            font-size: 27px;
+            font-weight: 700;
+        }
+
+        &-desc {
+            margin-bottom: 23px;
+        }
+
+        &-long-desc {
+            margin-bottom: 69px;
+            font-size: 16px;
+            line-height: 1.6875;
+        }
+
+        .anchor-button {
+            padding: 6px 15px;
+            margin-right: 16px;
+            font-size: 14px;
+            line-height: 1.214;
+        }
+    }
+}

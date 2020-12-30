@@ -4,17 +4,17 @@
     }
 
     &-title {
-        margin-bottom: 26px;
+        margin-bottom: 35px;
         font-size: 24px;
         font-weight: 700;
     }
 
     &-desc {
-        margin-bottom: 12px;
+        margin-bottom: 15px;
     }
 
     &-long-desc {
-        margin-bottom: 12px;
+        margin-bottom: 25px;
         font-size: 14px;
         line-height: 1.7142857143;
     }
@@ -59,4 +59,8 @@
             line-height: 1.214;
         }
     }
+}
+
+.contents:nth-child(2n+1) {
+    background-color: #FAF9FE;
 }

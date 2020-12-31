@@ -39,7 +39,8 @@ input:focus,
 input:active,
 textarea:focus,
 textarea:active,
-form:focus {
+form:focus,
+div:focus {
     outline: none;
     box-shadow: none;
 }

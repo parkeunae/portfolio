@@ -1,4 +1,6 @@
 $main-color: #9378FF;
+$contents-color: #99879D;
+$error-color: #F16B6F;
 
 /*
 컴포넌트별로 scss 파일을 만들면, 각 파일들이 css 파일로 컴파일된다.
@@ -36,7 +38,8 @@ button:active,
 input:focus,
 input:active,
 textarea:focus,
-textarea:active {
+textarea:active,
+form:focus {
     outline: none;
     box-shadow: none;
 }

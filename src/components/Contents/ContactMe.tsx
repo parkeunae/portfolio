@@ -1,9 +1,79 @@
-import React from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import emailjs from 'emailjs-com';
+import classNames from 'classnames';
+
+const SEND_EMAIL_FORM = {
+    NAME: 'user_name',
+    EMAIL: 'user_email',
+    SUBJECT: 'subject',
+    MESSAGE: 'message'
+};
+
+const INVALID_MESSAGE_ID = {
+    EMAIL: 'invalid-email-message',
+    MESSAGE: 'invalid-message-message'
+};
+
+const EMAIL_REGEX = /^([a-zA-Z0-9]+[-_.]?[a-zA-Z0-9]*?)@([a-zA-Z0-9]+[-_.]?[a-zA-Z0-9]*)[^.][.]([a-zA-Z]{2,3})$/;
+const MESSAGE_REGEX = /.*\S.*/;
 
 const ContactMe = () => {
-    const sendEmail = (e: React.FormEvent<HTMLFormElement>) => {
+    const [isValidEmail, setIsValidEmail] = useState(false);
+    const [isValidMessage, setIsValidMessage] = useState(false);
+
+    const emailInputRef = useRef<HTMLInputElement>(null);
+    const messageAreaRef = useRef<HTMLTextAreaElement>(null);
+
+    const toggleInvalidMessage = ({ isValid, invalidMessageId }: { isValid:boolean, invalidMessageId: string }) => {
+        const invalidMessage = document.getElementById(invalidMessageId);
+        if (invalidMessage) {
+            if (isValid) {
+                invalidMessage.style.display = 'none';
+            } else {
+                invalidMessage.style.display = 'block';
+            }
+        }
+    }
+
+    const changeValidStatus = ({ type, value, regex, invalidMessageId }
+        : { type: string, value: string, regex: RegExp, invalidMessageId: string }) => {
+        const isValid = regex.test(value);
+        if (type === SEND_EMAIL_FORM.EMAIL) {
+            setIsValidEmail(isValid);
+        } else if (type === SEND_EMAIL_FORM.MESSAGE) {
+            setIsValidMessage(isValid);
+        }
+
+        toggleInvalidMessage({ isValid, invalidMessageId });
+    }
+
+    const checkValidInputValue = (e: React.FocusEvent<HTMLInputElement|HTMLTextAreaElement>) => {
+        const { name, value } = e.currentTarget;
+
+        if (name === SEND_EMAIL_FORM.EMAIL) {
+            changeValidStatus({ type: name, value, regex: EMAIL_REGEX, invalidMessageId: INVALID_MESSAGE_ID.EMAIL });
+            return;
+        }
+
+        if (name === SEND_EMAIL_FORM.MESSAGE) {
+            changeValidStatus({ type: name, value, regex: MESSAGE_REGEX, invalidMessageId: INVALID_MESSAGE_ID.MESSAGE });
+        }
+    }
+
+    const sendEmail = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (!isValidEmail) {
+            toggleInvalidMessage({ isValid: isValidEmail, invalidMessageId: INVALID_MESSAGE_ID.EMAIL });
+            emailInputRef.current?.focus();
+            return;
+        }
+
+        if (!isValidMessage) {
+            toggleInvalidMessage({ isValid: isValidMessage, invalidMessageId: INVALID_MESSAGE_ID.MESSAGE });
+            messageAreaRef.current?.focus();
+            return;
+        }
 
         emailjs.sendForm(
             'gamil_service',
@@ -16,53 +86,74 @@ const ContactMe = () => {
         }, (error) => {
             console.log( error.text );
         });
-    }
+    }, [isValidEmail, isValidMessage, emailInputRef, messageAreaRef])
 
     return (
-        <form className="contact_form" onSubmit={ sendEmail }>
-            <div className="input-container">
-                <label htmlFor="name-input" className="sr-only">이름</label>
-                <input
-                    type="text"
-                    className="message-input-box"
-                    placeholder="Name"
-                    id="name-input"
-                    name="user_name"
-                />
-                <label htmlFor="email-input" className="sr-only">이메일</label>
-                <input
-                    type="email"
-                    className="message-input-box"
-                    placeholder="Email"
-                    id="email-input"
-                    name="user_email"
-                    required
-                />
-            </div>
-            <label htmlFor="subject-input" className="sr-only">제목</label>
-            <input
-                type="text"
-                className="message-input-box"
-                placeholder="Subject"
-                id="subject-input"
-                name="subject"
-            />
-            <label htmlFor="message-input" className="sr-only">내용</label>
-            <textarea
-                className="message-input-box"
-                placeholder="Message"
-                id="message-input"
-                name="message"
-                rows={ 5 }
-                required
-            >
-            </textarea>
-            <div className="button-container">
-                <button type="submit" className="fill-button">
-                    Send
-                </button>
-            </div>
-        </form>
+        <div>
+            <p className="form-info-message">
+                * 표시는 필수 입력 값입니다. 이메일과 메시지 내용은 꼭 적어주세요!
+            </p>
+            <form className="contact_form" onSubmit={ sendEmail }>
+                <div className={ classNames('form-row', 'input-container')}>
+                    <div>
+                        <label htmlFor="name-input" className="sr-only">이름</label>
+                        <input
+                            type="text"
+                            className="message-input-box"
+                            placeholder="Name"
+                            id="name-input"
+                            name={ SEND_EMAIL_FORM.NAME }
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="email-input" className="sr-only">이메일*</label>
+                        <input
+                            ref={ emailInputRef }
+                            type="email"
+                            className="message-input-box"
+                            placeholder="Email*"
+                            id="email-input"
+                            name={ SEND_EMAIL_FORM.EMAIL }
+                            onBlur={ checkValidInputValue }
+                        />
+                        <p className="invalid-message" id={ INVALID_MESSAGE_ID.EMAIL }>
+                            올바르지 않은 이메일 형식입니다. 다시 입력해주세요.
+                        </p>
+                    </div>
+                </div>
+                <div className="form-row">
+                    <label htmlFor="subject-input" className="sr-only">제목</label>
+                    <input
+                        type="text"
+                        className="message-input-box"
+                        placeholder="Subject"
+                        id="subject-input"
+                        name={ SEND_EMAIL_FORM.SUBJECT }
+                    />
+                </div>
+                <div className="form-row">
+                    <label htmlFor="message-input" className="sr-only">메시지 내용*</label>
+                    <textarea
+                        ref={ messageAreaRef }
+                        className="message-input-box"
+                        placeholder="Message*"
+                        id="message-input"
+                        name={ SEND_EMAIL_FORM.MESSAGE }
+                        rows={ 5 }
+                        onBlur={ checkValidInputValue }
+                    >
+                    </textarea>
+                    <p className="invalid-message" id={ INVALID_MESSAGE_ID.MESSAGE }>
+                        메시지를 작성해주세요.
+                    </p>
+                </div>
+                <div className="button-container">
+                    <button type="submit" className="fill-button">
+                        Send
+                    </button>
+                </div>
+            </form>
+        </div>
     )
 }
 

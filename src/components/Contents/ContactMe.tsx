@@ -61,6 +61,12 @@ const ContactMe = () => {
         }
     }
 
+    const resetContactForm = () => {
+        contactFormRef.current?.reset();
+        setIsValidEmail(false);
+        setIsValidMessage(false);
+    }
+
     const sendEmail = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -84,7 +90,7 @@ const ContactMe = () => {
         )
         .then((result) => {
             console.log( result.text);
-            contactFormRef.current?.reset();
+            resetContactForm();
         }, (error) => {
             console.log( error.text );
         });

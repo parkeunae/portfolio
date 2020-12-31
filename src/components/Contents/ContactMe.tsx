@@ -21,6 +21,7 @@ const ContactMe = () => {
     const [isValidEmail, setIsValidEmail] = useState(false);
     const [isValidMessage, setIsValidMessage] = useState(false);
 
+    const contactFormRef = useRef<HTMLFormElement>(null);
     const emailInputRef = useRef<HTMLInputElement>(null);
     const messageAreaRef = useRef<HTMLTextAreaElement>(null);
 
@@ -83,17 +84,19 @@ const ContactMe = () => {
         )
         .then((result) => {
             console.log( result.text);
+            contactFormRef.current?.reset();
         }, (error) => {
             console.log( error.text );
         });
-    }, [isValidEmail, isValidMessage, emailInputRef, messageAreaRef])
+    }, [isValidEmail, isValidMessage, emailInputRef, messageAreaRef, contactFormRef])
 
     return (
         <div>
             <p className="form-info-message">
                 * 표시는 필수 입력 값입니다. 이메일과 메시지 내용은 꼭 적어주세요!
             </p>
-            <form className="contact_form" onSubmit={ sendEmail }>
+
+            <form className="contact_form" onSubmit={ sendEmail } ref={ contactFormRef }>
                 <div className={ classNames('form-row', 'input-container')}>
                     <div>
                         <label htmlFor="name-input" className="sr-only">이름</label>

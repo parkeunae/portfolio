@@ -84,7 +84,7 @@
 
         .input-container {
             display: flex;
-            input:first-child {
+            input:first-of-type {
                 margin-right: 12px;
             }
         }

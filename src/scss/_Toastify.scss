@@ -1,0 +1,99 @@
+/** Used to define container behavior: width, position: fixed etc... **/
+.Toastify__toast-container {
+    width: 95vw;
+    min-width: 260px;
+    max-width: 370px;
+}
+
+/** Used to define the position of the ToastContainer **/
+.Toastify__toast-container--top-left {
+}
+.Toastify__toast-container--top-center {
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.Toastify__toast-container--top-right {
+}
+.Toastify__toast-container--bottom-left {
+}
+.Toastify__toast-container--bottom-center {
+}
+.Toastify__toast-container--bottom-right {
+}
+
+/** Classes for the displayed toast **/
+.Toastify__toast {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 0;
+    padding: 16px;
+    border: 1px solid #E5E5E5;
+    border-radius: 8px;
+    font-size: 14px;
+    box-shadow: 0px 2px 3px rgba(229, 229, 229, 0.25), 0px 3px 9px rgba(229, 229, 229, 0.17);
+}
+.Toastify__toast--rtl {
+}
+.Toastify__toast--dark {
+}
+.Toastify__toast--default {
+}
+.Toastify__toast--info {
+}
+.Toastify__toast--success {
+    color: #07bc0c;
+    background: #fff;
+}
+.Toastify__toast--warning {
+}
+.Toastify__toast--error {
+    color: $error-color;
+    background: #fff;
+}
+.Toastify__toast-body {
+    font-size: 13px;
+}
+
+/** Classes for the close button. Better use your own closeButton **/
+.Toastify__close-button {
+    border: none;
+    font-size: 12px;
+    color: #A7A7A2;
+    background-color: transparent;
+}
+.Toastify__close-button--default {
+}
+.Toastify__close-button > svg {
+}
+.Toastify__close-button:hover, .Toastify__close-button:focus {
+}
+
+/** Classes for the progress bar **/
+.Toastify__progress-bar {
+}
+.Toastify__progress-bar--animated {
+}
+.Toastify__progress-bar--controlled {
+}
+.Toastify__progress-bar--rtl {
+}
+.Toastify__progress-bar--default {
+}
+.Toastify__progress-bar--dark {
+}
+
+@media screen and (min-width: 768px) {
+    .Toastify__toast {
+        padding: 18px;
+    }
+
+    .Toastify__toast-container--top-center {
+        top: 15px;
+    }
+
+    .Toastify__toast-body {
+        font-size: 14px;
+    }
+}

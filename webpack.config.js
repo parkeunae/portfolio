@@ -30,7 +30,7 @@ module.exports = (webpackEnv) => {
                     }
                 ]
             }, {
-                test: /\.scss$/,
+                test: /\.(sc|c)ss$/,
                 use: [
                     'cache-loader',
                     MiniCssExtractPlugin.loader,

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useCallback } from 'react';
 import emailjs from 'emailjs-com';
 import classNames from 'classnames';
+import { ToastContainer, toast } from 'react-toastify';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SEND_EMAIL_FORM = {
     NAME: 'user_name',
@@ -14,8 +16,19 @@ const INVALID_MESSAGE_ID = {
     MESSAGE: 'invalid-message-message'
 };
 
+const NOTIFICATION_MESSAGE = {
+    SUCCESS: '메일 전송을 완료하였습니다.',
+    FAIL: '메일 전송을 실패하였습니다.'
+}
+
 const EMAIL_REGEX = /^([a-zA-Z0-9]+[-_.]?[a-zA-Z0-9]*?)@([a-zA-Z0-9]+[-_.]?[a-zA-Z0-9]*)[^.][.]([a-zA-Z]{2,3})$/;
 const MESSAGE_REGEX = /.*\S.*/;
+
+const CloseToastButton = () => (
+    <div className="Toastify__close-button">
+        <FontAwesomeIcon icon="times" aria-label="닫기" title="닫기" />
+    </div>
+);
 
 const ContactMe = () => {
     const [isValidEmail, setIsValidEmail] = useState(false);
@@ -91,8 +104,14 @@ const ContactMe = () => {
         .then((result) => {
             console.log( result.text);
             resetContactForm();
+            toast.success(NOTIFICATION_MESSAGE.SUCCESS, {
+                position: toast.POSITION.TOP_CENTER
+            });
         }, (error) => {
             console.log( error.text );
+            toast.error(NOTIFICATION_MESSAGE.FAIL, {
+                position: toast.POSITION.TOP_CENTER
+            });
         });
     }, [isValidEmail, isValidMessage, emailInputRef, messageAreaRef, contactFormRef])
 
@@ -162,8 +181,24 @@ const ContactMe = () => {
                     </button>
                 </div>
             </form>
+            <ToastContainer
+                hideProgressBar
+                closeButton={ CloseToastButton }
+                autoClose={ 1800 }
+            />
         </div>
     )
 }
 
 export default ContactMe;
+
+/**
+ * TODO:
+ *  1. 메시지 길이 어떻게 하지... 50kb 계산해서 최대 글자 개수 확인
+ *  2. 전송 성공/실패 알림 메시지 -> toastify 사용함 ㅜㅜ
+ *  3. 버튼 hover css
+ *  4. 스크롤 내릴 때 transition?? css 추가
+ */
+
+// TODO: https://getkap.co/ 캡처 프로그램 기억
+// color 조합 https://www.webdesignrankings.com/resources/lolcolors/

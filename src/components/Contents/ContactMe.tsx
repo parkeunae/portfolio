@@ -61,11 +61,11 @@ const ContactMe = () => {
         }
     }
 
-    const resetContactForm = () => {
+    const resetContactForm = useCallback(() => {
         contactFormRef.current?.reset();
         setIsValidEmail(false);
         setIsValidMessage(false);
-    }
+    }, [contactFormRef])
 
     const sendEmail = useCallback((e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();

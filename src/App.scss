@@ -10,6 +10,7 @@ scss 파일명 앞에 _를 붙이면 css 파일로 컴파일하지 않는다.
 @import './components/Header/Header';
 @import './components/Container/Contents';
 @import './components/Contents/Project';
+@import './components/Message/Message';
 
 * {
     box-sizing: border-box;

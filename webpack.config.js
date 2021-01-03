@@ -8,14 +8,15 @@ module.exports = (webpackEnv) => {
 
     return {
         mode: 'development',
-        devtool: 'eval',
+        devtool: 'inline-source-map', // https://perfectacle.github.io/2016/11/14/Webpack-devtool-option-Performance/
         resolve: {
             extensions: ['.tsx', '.ts', '.js' ]
         },
     
         entry: {
-            bundle: ['./src/index.tsx']
+            bundle: ['./src/index']
         }, // 입력
+        target: ['web', 'es5'],
         module: {
             rules: [{
                 test: /\.tsx?$/,
@@ -23,14 +24,32 @@ module.exports = (webpackEnv) => {
                 use: [
                     'cache-loader',
                     {
-                        loader: 'ts-loader',
+                        loader: 'babel-loader',
                         options: {
-                            transpileOnly: isDevelopment ? true : false,
+                            plugins: [
+                                [
+                                    '@babel/plugin-transform-runtime'
+                                ]
+                            ],
+                            presets: [
+                                [
+                                    '@babel/preset-env', {
+                                        targets: {
+                                            browsers: ['last 1 version', 'ie 11']
+                                        }
+                                    }
+                                ],
+                                '@babel/preset-react'
+                            ]
                         }
+                    },
+                    {
+                        loader: 'ts-loader'
                     }
                 ]
             }, {
-                test: /\.(sc|c)ss$/,
+                test: /\.s?css$/,
+                exclude: '/node_modules',
                 use: [
                     'cache-loader',
                     MiniCssExtractPlugin.loader,
@@ -44,7 +63,9 @@ module.exports = (webpackEnv) => {
             new HtmlWebpackPlugin({
                 template: './public/index.html'
             }),
-            new MiniCssExtractPlugin(),
+            new MiniCssExtractPlugin({
+                filename: 'app.css'
+            }),
         ],
         output: {
             path: path.join(__dirname, 'dist'),
@@ -52,7 +73,6 @@ module.exports = (webpackEnv) => {
         }, // 출력
         devServer: {
             publicPath: '/',
-            hot: true,
             open: true,
         }
     }
